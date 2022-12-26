@@ -1,0 +1,30 @@
+<h2 align="center">Мои заказы</h2>
+</br>
+<% wanted_items_ids = Meeting.where(user_id: session[:user_id]).pluck(:item_id) %>
+<% items = Item.all %>
+  <div class="row">
+    <% items.each do |item| %>
+      <% if (wanted_items_ids.include?(item.id)) then %>
+      <% status = Meeting.find_by(user_id: session[:user_id], item_id: item.id).status %>
+      <div class="col">
+        <div class="card" style="width: 18rem; height: 750px; background: #00FFFF;">
+          <%= image_tag(item.image_path, height: '300') %>
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <h6 class="card-title">Цена - <%= item.price %></h6>
+            <% if status == 'В процессе'%>
+              <p class="card-text" style="color:blue;">Статус - <%= status %></p>
+            <% else %>
+              <p class="card-text" style="color:green;">Статус - <%= status %></p>
+            <% end %>
+            <p class="card-text"><%= item.description %></p>
+            <% if status == 'В процессе'%>
+              <%= button_to 'Отменить заказ', {:controller => 'order_destroy', :action => 'delete', :user_id => session[:user_id], :item_id => item.id}, class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+        <br/><br/>
+      </div>
+      <% end %>
+    <% end %>
+  </div>

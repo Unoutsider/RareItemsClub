@@ -1,0 +1,25 @@
+ru:
+  activerecord:
+    models:
+      user: 'Пользователь'
+      item: 'Товар'
+    attributes:
+      user:
+        email: 'Адрес эл. почты'
+        name: 'Имя пользователя'
+        password: 'Пароль'
+        password_confirmation: 'Пароли'
+      item:
+        name: 'Имя товара'
+        price: 'Цена товара'
+        image_path: 'Путь к картинке товара'
+        description: 'Описание товара'
+    errors:
+      messages:
+        format: '%{attribute}%{message}'
+        blank: 'не может быть пустым'
+        taken: 'уже существует'
+        confirmation: 'не совпадают'
+  support:
+    array:
+      last_word_connector: ' и '

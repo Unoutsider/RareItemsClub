@@ -1,0 +1,21 @@
+<h2 align="center">Товары</h2>
+<br/>
+<% items = Item.all %>
+<% items.each_slice(3) do |elems| %>
+  <div class="row">
+    <% elems.each do |item| %>
+      <div class="col">
+        <div class="card" style="width: 18rem; height: 750px; background: #00FFFF;">
+          <%= image_tag(item.image_path, height: '300') %>
+          <div class="card-body">
+            <h5 class="card-title"><%= item.name %></h5>
+            <h6 class="card-title">Цена - <%= item.price %></h6>
+            <p class="card-text"><%= item.description %></p>
+            <%= button_to 'Удалить товар', {:controller => 'admin', :action => 'delete_item', :item_id => item.id}, class: 'btn btn-primary' %>
+          </div>
+        </div>
+        <br/><br/>
+      </div>
+    <% end %>
+  </div>
+<% end %>

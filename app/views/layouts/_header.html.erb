@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg" class="navbar">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if session[:user_id].nil? %>
+          <li class="nav-item">
+              <%= link_to 'RareItemsClub', '/main/input', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= image_tag('Tree.png', height: '30', weight: '30') %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Вход', '/sessions/new', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Регистрация', '/users/new', class: 'nav-link active' %>
+          </li>
+        <% elsif User.find(session[:user_id]).superuser %>
+          <li class="nav-item">
+              <%= link_to 'RareItemsClub', '/users/show', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= image_tag('Tree.png', height: '30', weight: '30') %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Заказы', '/admin/orders_show', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Добавить товар', '/admin/item_create', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Удалить товар', '/admin/show_item', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Выход', sessions_destroy_path, data: {turbo_method: :delete}, class: 'nav-link active' %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+              <%= link_to 'RareItemsClub', '/main/input', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= image_tag('Tree.png', height: '30', weight: '30') %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Мои заказы', '/main/output', class: 'nav-link active' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Выход', sessions_destroy_path, data: {turbo_method: :delete}, class: 'nav-link active' %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
